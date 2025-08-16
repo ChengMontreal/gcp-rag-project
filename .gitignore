@@ -1,5 +1,21 @@
+# System files
+.DS_Store
+
+# Python cache files
 __pycache__/
 *.pyc
-.env
-data/
-datapoints_batch_upload.json
+
+# Generated data files from our scripts
+datapoints*.json
+datapoints*.jsonl
+
+# Environment configuration files
+setup_env.sh
+
+# Accidental files
+=1.47.0
+
+# Intermediate scripts we no longer need
+simple_upload.py
+index_metadata.json
+clean_index.py
