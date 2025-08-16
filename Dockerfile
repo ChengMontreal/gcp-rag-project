@@ -2,6 +2,9 @@ FROM python:3.10
 
 WORKDIR /src
 
+# NEW LINE: Add the working directory to the Python path
+ENV PYTHONPATH /src
+
 ENV PYTHONUNBUFFERED True
 
 COPY requirements.txt /requirements.txt
@@ -14,5 +17,4 @@ EXPOSE ${PORT}
 
 COPY ./src/chatbot ./chatbot
 
-ENTRYPOINT streamlit run --server.port ${PORT} chatbot/app.py –-server.address=0.0.0.0 --server.enableCORS=false --server.enableWebsocketCompression=false --server.headless=true
-
+ENTRYPOINT streamlit run --server.port ${PORT} chatbot/app.py --server.address=0.0.0.0 --server.enableCORS=false --server.enableWebsocketCompression=false --server.headless=true

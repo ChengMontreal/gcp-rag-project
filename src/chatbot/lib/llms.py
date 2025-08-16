@@ -1,13 +1,24 @@
-from langchain.chat_models import ChatVertexAI
-from config import REGION
+# src/chatbot/lib/llms.py
 
+from langchain_google_vertexai import ChatVertexAI
+# CORRECTED IMPORT: Absolute path from the project root
+from chatbot.config import REGION
 
-def get_llm(callbacks=None, streaming: bool = False, max_output_tokens: int = 512, temperature: float = 0.1):
-    llm = ChatVertexAI(
+def get_llm(streaming: bool = False, streaming_handler=None):
+    """Initializes the ChatVertexAI model."""
+    
+    model_name = "gemini-2.5-flash"
+    
+    # Add streaming capabilities if requested
+    if streaming:
+        return ChatVertexAI(
+            location=REGION,
+            model_name=model_name,
+            streaming=True,
+            callbacks=[streaming_handler]
+        )
+    
+    return ChatVertexAI(
         location=REGION,
-        temperature=temperature,
-        streaming=streaming,
-        callbacks=callbacks,
-        max_output_tokens=max_output_tokens
+        model_name=model_name
     )
-    return llm
